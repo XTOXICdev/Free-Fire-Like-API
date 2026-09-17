@@ -50,15 +50,16 @@ async def send_request(encrypted_uid, token, url):
     try:
         edata = bytes.fromhex(encrypted_uid)
         headers = {
-            'User-Agent': "UnityPlayer/2022.3.47f1 (UnityWebRequest/1.0, libcurl/8.5.0-DEV)",
+            'User-Agent': "UnityPlayer/2018.4.12f1 (UnityWebRequest/1.0, libcurl/8.5.0-DEV)",
             'Connection': "Keep-Alive",
             'Accept-Encoding': "gzip",
+            'X-GA-SV': "1789638359",
             'Authorization': f"Bearer {token}",
             'Content-Type': "application/x-www-form-urlencoded",
             'Expect': "100-continue",
-            'X-Unity-Version': "2022.3.47f1",
+            'X-Unity-Version': "2018.4.12f1",
             'X-GA': "v1 1",
-            'ReleaseVersion': "OB54"
+            'ReleaseVersion': "OB55"
         }
         async with aiohttp.ClientSession() as session:
             async with session.post(url, data=edata, headers=headers) as response:
@@ -119,18 +120,19 @@ def make_request(encrypt, server_name, token):
         elif server_name in {"BR", "US", "SAC", "NA"}:
             url = "https://client.us.freefiremobile.com/GetPlayerPersonalShow"
         else:
-            url = "https://clientbp.ggpolarbear.com/GetPlayerPersonalShow"
+            url = "https://clientbp.ppmainecoonghj.com/GetPlayerPersonalShow"
         edata = bytes.fromhex(encrypt)
         headers = {
-            'User-Agent': "UnityPlayer/2022.3.47f1 (UnityWebRequest/1.0, libcurl/8.5.0-DEV)",
+            'User-Agent': "UnityPlayer/2018.4.12f1 (UnityWebRequest/1.0, libcurl/8.5.0-DEV)",
             'Connection': "Keep-Alive",
             'Accept-Encoding': "gzip",
+            'X-GA-SV': "1789638359",
             'Authorization': f"Bearer {token}",
             'Content-Type': "application/x-www-form-urlencoded",
             'Expect': "100-continue",
-            'X-Unity-Version': "2022.3.47f1",
+            'X-Unity-Version': "2018.4.12f1",
             'X-GA': "v1 1",
-            'ReleaseVersion': "OB54"
+            'ReleaseVersion': "OB55"
         }
         response = requests.post(url, data=edata, headers=headers, verify=False)
         hex_data = response.content.hex()
@@ -212,7 +214,7 @@ def handle_requests():
         elif server_name in {"BR", "US", "SAC", "NA"}:
             url = "https://client.us.freefiremobile.com/LikeProfile"
         else:
-            url = "https://clientbp.ggpolarbear.com/LikeProfile"
+            url = "https://clientbp.ppmainecoonghj.com/LikeProfile"
 
         # Send like requests
         requests_sent = asyncio.run(send_multiple_requests(uid, server_name, url))
